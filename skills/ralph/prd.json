@@ -1,0 +1,27 @@
+{
+  "project": "Example project",
+  "description": "One paragraph describing what is being built and why.",
+  "stories": [
+    {
+      "id": 1,
+      "title": "First story title",
+      "acceptance_criteria": [
+        "A concrete, checkable condition that must be true when done.",
+        "Another checkable condition."
+      ],
+      "done": false,
+      "blocked": false,
+      "note": ""
+    },
+    {
+      "id": 2,
+      "title": "Second story title",
+      "acceptance_criteria": [
+        "What must be true for this story to be complete."
+      ],
+      "done": false,
+      "blocked": false,
+      "note": ""
+    }
+  ]
+}

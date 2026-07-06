@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+vendor/
+.venv/
+venv/
+
+# Build output
+dist/
+build/
+.next/
+out/
+
+# IDE and OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+npm-debug.log*
+
+# Package locks (large, low signal)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Backups from primedirective
+.claude/backups/

@@ -1,0 +1,30 @@
+# OS and IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local-only governance
+*.local.md
+CLAUDE.local.md
+
+# Dependencies and build
+node_modules/
+__pycache__/
+*.pyc
+
+# Environment and secrets
+.env
+.env.*
+
+# Logs
+*.log
+
+# Prime Directive runtime artifacts
+.claude/backups/
+.pr-review/
+
+# Ralph runtime PRDs (keep the template, ignore working copies)
+prd.local.json
