@@ -27,13 +27,20 @@ prime-directive/
 │   ├── CLAUDE.md               The base governance template for a project
 │   └── .claudeignore
 ├── skills/
+│   ├── brainstorm/             /brainstorm   success criteria before any work
+│   ├── plan/                   /plan         tasks with criteria and must-not-break
+│   ├── execute/                /execute      runs a plan with regression gates
+│   ├── review-gate/            /review-gate  sixty-second scope and baseline check
+│   ├── debug/                  /debug        root cause first, then fix and guard
+│   ├── handoff/                /handoff      portable context for the next session
 │   ├── primedirective/         /primedirective  installs the system
-│   ├── primedirectivesync/     /claudesync      audits for drift
+│   ├── claudesync/             /claudesync      audits for drift
 │   ├── skillforge/             authors + validates new skills (SSL manifests)
 │   ├── ralph/                  /ralph  autonomous PRD execution escape hatch
 │   └── pr-review/              multi-dimensional fan-out review
 ├── docs/
-│   └── architecture.md         How the pieces fit together
+│   ├── architecture.md         How the pieces fit together
+│   └── handoffs/               Decision records from session handoffs
 ├── install.ps1                 Windows installer (symlink or copy)
 ├── install.sh                  Linux/macOS installer (symlink or copy)
 ├── VERSION
@@ -89,8 +96,12 @@ when you want a frozen version pinned to a specific engagement.
 
 ```powershell
 # Windows
-./install.ps1 -Mode copy -Target C:\Users\Brian\.claude
+./install.ps1 -Mode copy -Target "$env:USERPROFILE\.claude"
 ```
+
+Symlink mode on Windows needs a privilege that ordinary accounts do not have.
+When symlink creation is denied, `install.ps1` falls back to a directory
+junction, which behaves the same way for this purpose and needs no elevation.
 
 ```bash
 # Linux / macOS
@@ -100,7 +111,7 @@ when you want a frozen version pinned to a specific engagement.
 ## Versioning
 
 The `VERSION` file plus git tags anchor `/claudesync` drift detection. Tag each
-release (`git tag v0.1.0`) so a sync can report what changed since the last
+release (`git tag v0.3.0`) so a sync can report what changed since the last
 pinned version.
 
 ## License

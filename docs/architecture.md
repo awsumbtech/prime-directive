@@ -45,8 +45,24 @@ job. See `rules/SOLUTION_HIERARCHY.md`.
 
 ### 4. The skills
 
+The workflow skills are the Prime Directive in motion:
+
+- `brainstorm`: forces agreed, checkable success criteria before any work.
+- `plan`: decomposes into tasks, each with criteria, expected files, and a
+  must-not-break list, written to `docs/plans/`.
+- `execute`: runs a plan with a baseline, a regression gate after every task,
+  and the reviewer as the final word on each one. User-invoked only.
+- `review-gate`: the sixty-second check: task done, scope respected, baseline
+  held. Escalates to `pr-review` when a minute is not enough.
+- `debug`: debugger diagnoses, implementer fixes, tester guards, reviewer
+  verifies. Re-enters at diagnosis if the fix introduces new failures.
+- `handoff`: packages context for another session or agent with portable
+  anchors only, written to `docs/handoffs/`. User-invoked only.
+
+The meta-skills maintain the system itself:
+
 - `primedirective`: installs the whole system into a project (`/primedirective`).
-- `primedirectivesync`: audits the system for drift (`/claudesync`).
+- `claudesync`: audits the system for drift (`/claudesync`).
 - `skillforge`: authors and validates new skills with SSL-style manifests.
 - `ralph`: an autonomous PRD-execution escape hatch (`/ralph`).
 - `pr-review`: multi-dimensional fan-out review with a shared output contract.

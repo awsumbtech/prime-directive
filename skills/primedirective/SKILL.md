@@ -54,7 +54,7 @@ not as permission to clobber.
 Lay down the directories and files:
 
 ```bash
-mkdir -p .claude/agents .claude/skills .claude/rules docs/plans
+mkdir -p .claude/agents .claude/skills .claude/rules docs/plans docs/handoffs
 ```
 
 Copy from the master source:
@@ -89,7 +89,7 @@ echo "=== Agents ===" && ls -1 .claude/agents/
 echo "=== Skills ===" && ls -1 .claude/skills/
 echo "=== Rules ===" && ls -1 .claude/rules/
 echo "=== Root files ===" && ls -1 CLAUDE.md .claudeignore
-echo "=== Plans dir ===" && ls -d docs/plans
+echo "=== Plans and handoffs dirs ===" && ls -d docs/plans docs/handoffs
 ```
 
 Then present:
@@ -99,10 +99,11 @@ Prime Directive setup complete.
 
 CLAUDE.md        Customized for this project
 6 agents         explorer, implementer, reviewer, tester, documenter, debugger
-skills           /brainstorm, /plan, /execute, /review-gate, /debug, and meta-skills
+skills           /brainstorm, /plan, /execute, /review-gate, /debug, /handoff, and meta-skills
 rules            agent-routing, SOLUTION_HIERARCHY
 .claudeignore    configured for {project_type}
 docs/plans/      ready for implementation plans
+docs/handoffs/   ready for session handoffs
 
 The Prime Directive is active: every change requires success criteria, baseline
 testing, blast-radius checks, and regression verification before it is "done".

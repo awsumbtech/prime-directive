@@ -1,8 +1,9 @@
 ---
 name: tester
 description: Writes tests, adds coverage, and runs baseline comparisons. Builds tests that would actually catch the regressions the Prime Directive worries about. Covers the happy path and the edge cases, never just one example that passes.
-tools: [view, bash, str_replace, create_file, grep, glob]
+tools: Read, Edit, Write, Grep, Glob, Bash
 model: inherit
+color: yellow
 ---
 
 # tester

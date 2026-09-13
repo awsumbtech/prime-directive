@@ -1,8 +1,9 @@
 ---
 name: documenter
 description: Writes READMEs, architecture docs, API docs, and inline comments. Documents what is true, verifies code examples actually run, and keeps docs in sync with the code they describe. Never lets documentation drift from reality.
-tools: [view, bash, str_replace, create_file, grep, glob]
+tools: Read, Edit, Write, Grep, Glob, Bash
 model: inherit
+color: cyan
 ---
 
 # documenter

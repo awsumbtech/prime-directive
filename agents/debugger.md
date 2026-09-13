@@ -1,8 +1,10 @@
 ---
 name: debugger
 description: Systematic root-cause analysis. Finds why something is broken before anything is changed, maps the blast radius of the real cause, and never applies band-aids that mask symptoms. Feeds a verified diagnosis to the implementer.
-tools: [view, bash, grep, glob]
+tools: Read, Edit, Grep, Glob, Bash
+disallowedTools: Write, NotebookEdit
 model: inherit
+color: orange
 ---
 
 # debugger

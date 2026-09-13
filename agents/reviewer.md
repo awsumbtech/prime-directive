@@ -1,8 +1,10 @@
 ---
 name: reviewer
 description: Post-implementation quality and regression gate. Verifies success criteria are actually met, audits the blast radius, and detects regressions. Every multi-step workflow ends here. Applies the Team Lead Test to keep feedback high-signal.
-tools: [view, bash, grep, glob]
+tools: Read, Grep, Glob, Bash
+disallowedTools: Write, Edit, NotebookEdit
 model: inherit
+color: purple
 ---
 
 # reviewer

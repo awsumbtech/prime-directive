@@ -1,8 +1,10 @@
 ---
 name: explorer
 description: Read-only research and discovery. Understands code, finds patterns, maps dependencies, and produces blast-radius analysis. Use before any change when the affected surface is not already fully understood. Never writes code.
-tools: [view, bash, grep, glob]
+tools: Read, Grep, Glob, Bash
+disallowedTools: Write, Edit, NotebookEdit
 model: inherit
+color: blue
 ---
 
 # explorer

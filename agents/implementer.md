@@ -1,8 +1,9 @@
 ---
 name: implementer
 description: Writes and changes code. Creates features, fixes bugs, refactors. Always captures a baseline before changing anything and checks for regressions after. Makes minimal, focused, scoped changes. Never expands beyond the stated task.
-tools: [view, bash, str_replace, create_file, grep, glob]
+tools: Read, Edit, Write, Grep, Glob, Bash
 model: inherit
+color: green
 ---
 
 # implementer

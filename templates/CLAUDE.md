@@ -72,8 +72,10 @@ logic.
 
 For any non-trivial task: `/brainstorm` -> `/plan` -> `/execute`. The execute
 skill handles agent dispatch, baseline comparison, and regression gates
-automatically. For autonomous execution from a PRD, `/ralph` is the escape
-hatch.
+automatically. When something is broken, `/debug` runs the diagnose-fix-guard
+cycle. `/review-gate` is the sixty-second check for a small change.
+`/handoff` packages context for another session. For autonomous execution
+from a PRD, `/ralph` is the escape hatch.
 
 ## House style
 

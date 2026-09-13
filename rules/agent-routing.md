@@ -22,6 +22,8 @@ referenced from the project CLAUDE.md.
 | Breaking down work | `plan` | "plan this", "break this down". Every task gets success criteria plus "must not break". |
 | Running a plan | `execute` | "execute", "do it", "run the plan". Baseline capture, regression gates at every step. |
 | Something's broken | `debug` | "bug", "broken", "not working". Root cause first, blast radius mapped, no band-aids. |
+| Quick check on a small change | `review-gate` | "sanity check", "quick review", before a commit, between `/execute` tasks. Sixty seconds: task done, scope respected, baseline held. |
+| Passing work to another session | `handoff` | "/handoff". Portable context package in `docs/handoffs/`. Receiver assesses before acting. |
 | Autonomous PRD execution | `ralph` | "/ralph". Escape hatch: hand it a PRD and let it loop. Bypasses multi-agent routing by design. |
 
 ## Routing logic
@@ -45,7 +47,8 @@ Common sequences:
 - Investigation only: explorer
 
 The `/execute` skill automates these sequences from a plan. Use it for anything
-beyond a single-agent task.
+beyond a single-agent task. The `/debug` skill automates the bug-fix sequence
+and re-enters at the debugger if a fix introduces new failures.
 
 ## Handoff protocol
 

@@ -1,69 +1,70 @@
 ---
 name: skillforge
 description: Authors and validates new Prime Directive skills. Produces SKILL.md files with SSL-style three-layer manifests (scheduling, structural, logical) and validates them against retrieval, invocation, and audit requirements. Use when creating any new skill from scratch or restructuring an existing one.
-manifest:
-  scheduling:
-    goal: author_validated_skill_artifact
-    arguments:
-      - skill_name
-      - source_material
-      - target_use_cases
-    dependencies:
-      - bash
-      - view
-      - str_replace
-      - create_file
-    triggers:
-      - "/skillforge"
-      - "create a new skill"
-      - "draft a skill for"
-      - "turn this SOP into a skill"
-  structural:
-    scenes:
-      - id: gather
-        type: read_only_discovery
-      - id: draft_manifest
-        type: structured_authoring
-      - id: draft_body
-        type: prose_authoring
-      - id: validate
-        type: self_check
-      - id: dry_run
-        type: simulation
-      - id: present
-        type: present_to_user
-      - id: write
-        type: write_with_approval
-    entry: gather
-    transitions:
-      - gather -> draft_manifest
-      - draft_manifest -> draft_body
-      - draft_body -> validate
-      - validate -> draft_manifest
-      - validate -> dry_run
-      - dry_run -> draft_body
-      - dry_run -> present
-      - present -> write
-  logical:
-    actions:
-      - read
-      - analyze
-      - draft
-      - write_with_approval
-    resources:
-      reads:
-        - "skills/**/SKILL.md"
-        - "CLAUDE.md"
-        - "CLAUDE.local.md"
-        - "agents/**"
-        - source_material_path
-      writes:
-        - "skills/<new-skill-name>/SKILL.md"
-        - "skills/<new-skill-name>/**"
-      network: false
-      credentials: false
-    blast_radius: skill_library
-    reversibility: backed_up_before_overwrite
+metadata:
+  manifest:
+    scheduling:
+      goal: author_validated_skill_artifact
+      arguments:
+        - skill_name
+        - source_material
+        - target_use_cases
+      dependencies:
+        - bash
+        - view
+        - str_replace
+        - create_file
+      triggers:
+        - "/skillforge"
+        - "create a new skill"
+        - "draft a skill for"
+        - "turn this SOP into a skill"
+    structural:
+      scenes:
+        - id: gather
+          type: read_only_discovery
+        - id: draft_manifest
+          type: structured_authoring
+        - id: draft_body
+          type: prose_authoring
+        - id: validate
+          type: self_check
+        - id: dry_run
+          type: simulation
+        - id: present
+          type: present_to_user
+        - id: write
+          type: write_with_approval
+      entry: gather
+      transitions:
+        - gather -> draft_manifest
+        - draft_manifest -> draft_body
+        - draft_body -> validate
+        - validate -> draft_manifest
+        - validate -> dry_run
+        - dry_run -> draft_body
+        - dry_run -> present
+        - present -> write
+    logical:
+      actions:
+        - read
+        - analyze
+        - draft
+        - write_with_approval
+      resources:
+        reads:
+          - "skills/**/SKILL.md"
+          - "CLAUDE.md"
+          - "CLAUDE.local.md"
+          - "agents/**"
+          - source_material_path
+        writes:
+          - "skills/<new-skill-name>/SKILL.md"
+          - "skills/<new-skill-name>/**"
+        network: false
+        credentials: false
+      blast_radius: skill_library
+      reversibility: backed_up_before_overwrite
 ---
 
 # skillforge
@@ -72,6 +73,11 @@ Authors new skills that fit the Prime Directive framework. The output is a
 SKILL.md file with a complete SSL-style manifest, a focused prose body, and
 validation evidence that the skill will retrieve correctly, load only when
 needed, and pass an invocation hygiene audit.
+
+The manifest lives under the `metadata:` frontmatter key. Claude Code defines
+`metadata` as the one free-form map it passes through without interpreting, so
+that is where framework-specific structure belongs. Every other frontmatter key
+must be one Claude Code recognizes.
 
 This skill exists because skill authoring is the single highest-leverage
 activity in the Prime Directive system. A bad skill pollutes retrieval, gets

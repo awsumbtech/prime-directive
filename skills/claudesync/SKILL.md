@@ -1,10 +1,10 @@
 ---
-name: primedirectivesync
+name: claudesync
 description: Audits CLAUDE.md, CLAUDE.local.md, agents, and skills for drift against the actual project. Detects stale commands, missing @ references, outdated tech stack, changed structure, and invocation-hygiene problems. Proposes specific fixes and writes them only with approval. User-invoked via /claudesync.
 disable-model-invocation: true
 ---
 
-# primedirectivesync
+# claudesync
 
 Detects drift between the Prime Directive governance files and the project as
 it actually is now. Run it with `/claudesync` whenever the project has changed
@@ -70,6 +70,8 @@ same way `/primedirective` does.
 
 ## Notes
 
+- The skill folder is named `claudesync` because Claude Code derives the
+  slash command from the directory name, not from the `name` field.
 - User-invoked only. The agent does not auto-run drift audits.
 - Run this after any significant project change: new framework, moved
   directories, changed build tooling, or a batch of new skills.
