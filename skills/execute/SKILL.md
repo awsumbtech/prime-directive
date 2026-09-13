@@ -31,6 +31,17 @@ of any failing tests in the plan's Baseline section and in the execution log.
 This snapshot is the reference for every regression gate that follows. Set the
 plan status to `in progress`.
 
+Record the hook baseline as well, so the regression-gate hook compares
+against the same "before" state:
+
+```bash
+node "$HOME/.claude/hooks/regression-gate.js" --baseline
+```
+
+On Windows the path is `$env:USERPROFILE\.claude\hooks\regression-gate.js`.
+If the install is project-local, use the project's `.claude/hooks/` instead.
+The hook reads the test command from the `- Test:` line in CLAUDE.md.
+
 ## Per-task loop
 
 For each task, in order:

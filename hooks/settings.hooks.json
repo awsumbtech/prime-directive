@@ -1,0 +1,30 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"{HOOKS_DIR}/write-gate.js\"",
+            "timeout": 10,
+            "statusMessage": "Prime Directive: style and secrets gate"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "implementer|tester",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"{HOOKS_DIR}/regression-gate.js\"",
+            "timeout": 900,
+            "statusMessage": "Prime Directive: regression gate"
+          }
+        ]
+      }
+    ]
+  }
+}

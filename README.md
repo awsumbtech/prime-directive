@@ -23,6 +23,11 @@ prime-directive/
 ├── rules/
 │   ├── agent-routing.md        How work is dispatched to the agents
 │   └── SOLUTION_HIERARCHY.md   Where behavior changes belong (Tier 0-3)
+├── hooks/
+│   ├── write-gate.js           PreToolUse: no em dashes, no secrets in any write
+│   ├── regression-gate.js      SubagentStop: no net-new failures after implementer or tester
+│   ├── merge-settings.js       Registers the hooks in settings.json (run by the installers)
+│   └── settings.hooks.json     The hook entries the installers merge
 ├── templates/
 │   ├── CLAUDE.md               The base governance template for a project
 │   ├── settings.ponytail.json  Scopes ponytail injection to code-writing agents
@@ -41,6 +46,8 @@ prime-directive/
 │   └── pr-review/              multi-dimensional fan-out review (six dimensions)
 ├── docs/
 │   ├── architecture.md         How the pieces fit together
+│   ├── intake.md               How something new gets into the framework
+│   ├── candidates.md           Ledger of ideas moving through intake
 │   └── handoffs/               Decision records from session handoffs
 ├── install.ps1                 Windows installer (symlink or copy)
 ├── install.sh                  Linux/macOS installer (symlink or copy)
@@ -108,6 +115,41 @@ junction, which behaves the same way for this purpose and needs no elevation.
 # Linux / macOS
 ./install.sh --mode copy --target ~/.claude
 ```
+
+## Hooks
+
+Three of the Prime Directive's rules are enforced by Claude Code hooks rather
+than by prose, because a hook holds when the context is full and a sentence
+does not. The installers copy `hooks/` and register the entries in the target
+directory's `settings.json`; Node.js must be on PATH.
+
+The write gate runs before every Write, Edit, and Bash call. It denies any
+content containing an em dash, and any content matching a credential shape
+(cloud keys, tokens, private key blocks, connection-string passwords, literal
+password assignments). Placeholders pass. For a false positive, set
+`PRIME_DIRECTIVE_STYLE_GATE=off` or `PRIME_DIRECTIVE_SECRETS_GATE=off` for the
+session.
+
+The regression gate runs when the implementer or tester finishes. It runs the
+project's test command, taken from the `- Test:` line in CLAUDE.md, and
+compares the result with the baseline recorded at `.claude/baseline.json`. A
+failure that was not in the baseline blocks the agent with the failing lines.
+`/execute` and `/debug` record the baseline before any change; you can also
+run it by hand:
+
+```bash
+node "$HOME/.claude/hooks/regression-gate.js" --baseline
+```
+
+With no test command the gate stands down and says so. Failure matching is
+by output signature, which is a heuristic; a suite that is green at baseline
+needs none.
+
+## Adding things
+
+New tools, skills, hooks, and improvements to ponytail or Ralph go through
+the process in [docs/intake.md](docs/intake.md) and are tracked in
+[docs/candidates.md](docs/candidates.md).
 
 ## Ponytail
 

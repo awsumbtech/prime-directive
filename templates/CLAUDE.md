@@ -12,6 +12,9 @@
 - Lint: `{LINT_COMMAND}`
 - Build: `{BUILD_COMMAND}`
 
+The regression-gate hook runs the Test command above after the implementer
+or tester finishes and blocks on any failure that was not in the baseline.
+
 ## THE PRIME DIRECTIVE - Read This First
 
 **Every change must leave the project in a BETTER state than you found it.

@@ -13,7 +13,7 @@ Operationally that means: define success criteria, capture a baseline, map the
 blast radius, make a minimal change, re-run the baseline, and verify the actual
 goal. No change is "done" until it is proven to have caused no regression.
 
-## The five moving parts
+## The six moving parts
 
 ### 1. The Prime Directive itself
 
@@ -67,7 +67,22 @@ The meta-skills maintain the system itself:
 - `ralph`: an autonomous PRD-execution escape hatch (`/ralph`).
 - `pr-review`: multi-dimensional fan-out review with a shared output contract.
 
-### 5. Ponytail
+### 5. The hooks
+
+Until version 0.5.0 every rule in this repo was Tier 2 or Tier 3 while the
+Solution Hierarchy said to reach for Tier 0 first. The hooks close that gap
+for the three rules that can be checked mechanically. The write gate is a
+PreToolUse hook that denies em dashes and credential-shaped content in any
+write or command. The regression gate is a SubagentStop hook on the
+implementer and tester that runs the project's test command and blocks on
+any failure absent from the recorded baseline. Both are Node scripts in
+`hooks/`, registered by the installers through `merge-settings.js`, and both
+stand down rather than block when they lack what they need: no test command,
+no baseline, unparseable input. A gate that blocks on its own bug is worse
+than no gate. The scope-creep check stays in `review-gate` at Tier 3 until a
+hook can read the plan's expected files; `docs/candidates.md` tracks that.
+
+### 6. Ponytail
 
 Ponytail (github.com/DietrichGebert/ponytail, MIT) is the minimalism layer:
 a ladder that stops code from being written when reuse, the standard library,

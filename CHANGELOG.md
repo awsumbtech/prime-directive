@@ -4,6 +4,47 @@ All notable changes to Prime Directive are recorded here. Versions follow
 semantic versioning. Tag each release in git so `/claudesync` can report what
 changed since the last pinned version.
 
+## [0.5.0] - 2026-09-13
+
+The first Tier 0 release. Until now every Prime Directive rule was prose or
+an agent definition, while `rules/SOLUTION_HIERARCHY.md` told everyone to
+reach for hooks first. Three rules that can be checked mechanically now are.
+
+### Added
+- `hooks/write-gate.js`: PreToolUse hook on Write, Edit, MultiEdit,
+  NotebookEdit, and Bash. Denies content containing an em dash, and content
+  matching credential shapes (AWS and GitHub and Slack and Anthropic keys,
+  private key blocks, Azure storage keys, connection-string passwords,
+  literal password or token assignments). Placeholder values pass. Per-session
+  overrides through `PRIME_DIRECTIVE_STYLE_GATE=off` and
+  `PRIME_DIRECTIVE_SECRETS_GATE=off`.
+- `hooks/regression-gate.js`: SubagentStop hook on the implementer and
+  tester. Runs the test command from CLAUDE.md, compares with the baseline
+  at `.claude/baseline.json`, and blocks with the failing lines on any
+  net-new failure. `--baseline` records the "before" state; `--check` runs
+  the comparison by hand. Honors `stop_hook_active` so a subagent is never
+  looped forever. Stands down, with a message, when there is no test command
+  or no baseline.
+- `hooks/merge-settings.js` and `hooks/settings.hooks.json`: idempotent
+  registration of the hook entries into a settings.json, with backup. Both
+  installers call it; Node.js is now required for hook registration and the
+  installers say so if it is missing.
+- `docs/intake.md` and `docs/candidates.md`: the five-step process for
+  adding, changing, or retiring anything in the framework, including
+  improvements to ponytail and Ralph, and the ledger that tracks candidates
+  through it.
+
+### Changed
+- `install.ps1` and `install.sh` copy or link `hooks/` alongside agents,
+  skills, and rules, then register the hooks.
+- `/execute` Step 0 and `/debug` Step 1 record the hook baseline so the gate
+  compares against the same state the skill captured.
+- `/primedirective` fills the `- Test:` line knowing the hook reads it, and
+  proposes ignoring `.claude/baseline.json`.
+- `templates/CLAUDE.md` states, under Commands, that the Test line drives the
+  regression gate.
+- README and architecture describe the hooks and the intake process.
+
 ## [0.4.0] - 2026-09-13
 
 Adds the ponytail minimalism layer. Ponytail (github.com/DietrichGebert/ponytail,

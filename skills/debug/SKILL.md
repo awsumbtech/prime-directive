@@ -20,6 +20,13 @@ name, the wrong output. Then run the full test suite and record the result.
 The baseline matters more here than anywhere else, because a bug fix that
 breaks two other tests is a net loss and only the baseline proves it.
 
+Record the hook baseline too, so the regression-gate hook on the implementer
+and tester compares against the state before the fix:
+
+```bash
+node "$HOME/.claude/hooks/regression-gate.js" --baseline
+```
+
 If the suite cannot run, say so and record what manual check will stand in
 for it. Do not skip this step because the bug looks obvious. Obvious bugs are
 the ones that get band-aided.

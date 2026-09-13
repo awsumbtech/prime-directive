@@ -67,6 +67,12 @@ Copy from the master source:
 
 Fill the CLAUDE.md placeholders ({PROJECT_NAME}, {TECH_STACK}, {TEST_COMMAND},
 etc.) from what Phase 1 detected. Leave {PROJECT_SPECIFIC_NOTES} for the user.
+The `- Test:` line matters beyond documentation: the regression-gate hook
+reads it to run the suite, so fill it with the real command or leave the
+placeholder so the hook knows to stand down.
+
+Propose adding `.claude/baseline.json` to the project's `.gitignore`. It is
+the regression gate's recorded "before" state and is machine-local.
 
 ## Phase 4b: ponytail plugin
 
@@ -118,6 +124,7 @@ Prime Directive setup complete.
 CLAUDE.md        Customized for this project
 6 agents         explorer, implementer, reviewer, tester, documenter, debugger
 skills           /brainstorm, /plan, /execute, /review-gate, /debug, /handoff, and meta-skills
+hooks            style and secrets gate on every write, regression gate on implementer and tester
 rules            agent-routing, SOLUTION_HIERARCHY
 .claudeignore    configured for {project_type}
 docs/plans/      ready for implementation plans
