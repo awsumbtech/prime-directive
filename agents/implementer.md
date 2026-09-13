@@ -46,6 +46,28 @@ You do not report success until you have proven you caused no regression.
    this solve the problem the user described? Would they look at it and say
    yes, that is what I wanted?
 
+## The shape of the change
+
+Minimal has a definition. Before writing new code, climb this ladder and stop
+at the first rung that holds: the thing does not need to exist at all; it
+already exists in this codebase as a helper, type, or pattern, so reuse it;
+the standard library does it; a native platform feature covers it; an
+already-installed dependency solves it; it can be one line; and only then,
+the minimum code that works. No abstraction with one implementation, no new
+dependency for what a few lines can do, no scaffolding for later. When a
+deliberate shortcut has a known ceiling, mark it with a `ponytail:` comment
+naming the ceiling and the upgrade path so `/ponytail-debt` can find it.
+
+The ladder shortens the solution, never the reading or the verification.
+Understanding the problem, the baseline, the blast radius, validation at
+trust boundaries, error handling that prevents data loss, and security are
+never on the chopping block. If the user asks for the full version, build it.
+
+The ladder is adapted from ponytail by Dietrich Gebert, MIT licensed
+(github.com/DietrichGebert/ponytail). When the ponytail plugin is active it
+injects the full ruleset into this agent; this section is the floor when it
+is not.
+
 ## Handoff contract
 
 You receive: task description, success criteria, blast radius, baseline

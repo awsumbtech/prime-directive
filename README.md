@@ -25,6 +25,7 @@ prime-directive/
 │   └── SOLUTION_HIERARCHY.md   Where behavior changes belong (Tier 0-3)
 ├── templates/
 │   ├── CLAUDE.md               The base governance template for a project
+│   ├── settings.ponytail.json  Scopes ponytail injection to code-writing agents
 │   └── .claudeignore
 ├── skills/
 │   ├── brainstorm/             /brainstorm   success criteria before any work
@@ -37,7 +38,7 @@ prime-directive/
 │   ├── claudesync/             /claudesync      audits for drift
 │   ├── skillforge/             authors + validates new skills (SSL manifests)
 │   ├── ralph/                  /ralph  autonomous PRD execution escape hatch
-│   └── pr-review/              multi-dimensional fan-out review
+│   └── pr-review/              multi-dimensional fan-out review (six dimensions)
 ├── docs/
 │   ├── architecture.md         How the pieces fit together
 │   └── handoffs/               Decision records from session handoffs
@@ -107,6 +108,23 @@ junction, which behaves the same way for this purpose and needs no elevation.
 # Linux / macOS
 ./install.sh --mode copy --target ~/.claude
 ```
+
+## Ponytail
+
+Prime Directive pairs with the [ponytail](https://github.com/DietrichGebert/ponytail)
+plugin for production-code minimalism. Ponytail decides how little code to
+write; the Prime Directive decides how to prove the change is safe. Install
+it from inside Claude Code, then restart:
+
+```
+/plugin marketplace add DietrichGebert/ponytail
+/plugin install ponytail@ponytail
+```
+
+By default ponytail injects its ruleset into every subagent. Merge
+`templates/settings.ponytail.json` into your `.claude/settings.json` to
+limit that to the implementer and debugger, so the tester keeps full
+coverage and the explorer and reviewer keep their reporting contracts.
 
 ## Versioning
 

@@ -1,6 +1,6 @@
 ---
 name: pr-review
-description: Multi-dimensional PR review via parallel sub-agents. Captures a diff, fans out to specialist reviewers (correctness, security, solution-hierarchy, tests, docs), each writing to a shared output contract, then consolidates into one prioritized review. Applies the Team Lead Test to keep it high-signal. Invoke for reviewing a branch, a PR, or a set of staged changes.
+description: Multi-dimensional PR review via parallel sub-agents. Captures a diff, fans out to specialist reviewers (correctness, security, solution-hierarchy, tests, docs, simplicity), each writing to a shared output contract, then consolidates into one prioritized review. Applies the Team Lead Test to keep it high-signal. Invoke for reviewing a branch, a PR, or a set of staged changes.
 ---
 
 # pr-review
@@ -38,6 +38,7 @@ format defined in `dimensions/_shared-contract.md`. The dimensions:
 - `dimensions/solution-hierarchy.md`
 - `dimensions/tests.md`
 - `dimensions/docs.md`
+- `dimensions/simplicity.md`
 
 Each sub-agent stays in its lane. The correctness reviewer does not comment on
 docs; the docs reviewer does not comment on security. This is what keeps the

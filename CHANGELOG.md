@@ -4,6 +4,58 @@ All notable changes to Prime Directive are recorded here. Versions follow
 semantic versioning. Tag each release in git so `/claudesync` can report what
 changed since the last pinned version.
 
+## [0.4.0] - 2026-09-13
+
+Adds the ponytail minimalism layer. Ponytail (github.com/DietrichGebert/ponytail,
+MIT) is a ladder that stops code from being written when reuse, the standard
+library, or a platform feature already covers the need. It is consumed as a
+Claude Code plugin, not vendored, because its value comes from hook-based
+injection at session and subagent start. An independent benchmark found the
+same ruleset installed as a bare skill self-activated zero times in ten
+sessions. That is the Solution Hierarchy in one sentence: the hook is Tier 0,
+the prose is Tier 3, and copying the prose would have kept the words and lost
+the mechanism.
+
+### Added
+- `skills/pr-review/dimensions/simplicity.md`: a sixth review dimension that
+  hunts over-engineering only (delete, stdlib, native, yagni, shrink), in the
+  shared contract format with severity guidance that keeps it from ever
+  producing a blocker on its own.
+- `templates/settings.ponytail.json`: scopes ponytail's subagent injection to
+  the implementer and debugger through `PONYTAIL_SUBAGENT_MATCHER`, so the
+  tester keeps full coverage and the explorer, reviewer, and documenter keep
+  their reporting contracts.
+- `NOTICE.md`: MIT attribution for the adapted ponytail material.
+- `/primedirective` Phase 4b: detects whether the ponytail plugin is
+  installed, gives the two install commands if not, and proposes the
+  settings merge if so.
+
+### Changed
+- `implementer` carries a condensed version of the ladder as a floor for
+  sessions where the plugin is absent, with the explicit boundary that the
+  ladder shortens the solution and never the reading, the baseline, or the
+  verification.
+- `tester` states the one place ponytail and the Prime Directive disagree
+  and which one wins: ponytail's one-check minimum is a floor, not a
+  ceiling, because a thin suite makes "no net-new failures" meaningless.
+- `debugger` prefers the fix at the point all callers route through, which
+  is both the smaller diff and the one that does not leave a sibling caller
+  broken.
+- `templates/CLAUDE.md` house style names the ladder for production code and
+  the test-coverage exception in one bullet.
+- `docs/architecture.md` gains a fifth moving part describing the division
+  of labor: ponytail governs the shape of production code, the Prime
+  Directive governs process and verification.
+- README documents the plugin install and the settings merge.
+
+### Unchanged on purpose
+- `ralph` is untouched. It remains the escape hatch in `skills/ralph/`,
+  registered as `/ralph`, listed in the routing table, the CLAUDE.md
+  template, the README, and the architecture doc. Ponytail contains no loop
+  or autonomous component of its own; when the plugin is installed its
+  SessionStart hook applies the ladder to each headless Ralph iteration
+  automatically, with no change to `ralph.sh` or `RALPH.md`.
+
 ## [0.3.0] - 2026-09-13
 
 Forward rebuild. Keeps everything in 0.1.0 that worked, adds the six workflow

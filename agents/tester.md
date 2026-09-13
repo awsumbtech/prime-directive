@@ -41,6 +41,16 @@ Do not write horizontal slices (all the tests first as stubs, then all the
 implementations). Write vertical, tracer-bullet tests: one complete, passing,
 meaningful test before the next. Each test should stand on its own.
 
+## If ponytail is active
+
+The ponytail ruleset, when the plugin injects it into this agent, says lazy
+code leaves one runnable check behind and that YAGNI applies to tests. In the
+Prime Directive that one check is the floor, not the ceiling. Ponytail governs
+the shape of production code; the Prime Directive governs verification, and a
+thin suite makes "no net-new failures" meaningless. Cover the real surface as
+described above. Do not shrink a test plan to satisfy a minimalism rule
+written for production code.
+
 ## Handoff contract
 
 You receive: the code or feature to cover, and any specific risks the explorer

@@ -68,6 +68,24 @@ Copy from the master source:
 Fill the CLAUDE.md placeholders ({PROJECT_NAME}, {TECH_STACK}, {TEST_COMMAND},
 etc.) from what Phase 1 detected. Leave {PROJECT_SPECIFIC_NOTES} for the user.
 
+## Phase 4b: ponytail plugin
+
+The Prime Directive expects the ponytail plugin for production-code
+minimalism. It is a Claude Code plugin, not a file in this repo, so this
+skill cannot copy it. Check whether it is installed: a ponytail entry under
+`~/.claude/plugins/marketplaces/`, or `enabledPlugins` in
+`~/.claude/settings.json` listing it. If it is absent, give the user the two
+commands and move on:
+
+```
+/plugin marketplace add DietrichGebert/ponytail
+/plugin install ponytail@ponytail
+```
+
+If it is present, propose merging `templates/settings.ponytail.json` into the
+project's `.claude/settings.json` so the ruleset is injected only into the
+agents that write production code. Show the merge before applying it.
+
 ## Phase 5: Propose @ context references
 
 Scan for files that are referenced widely and would benefit from being loaded

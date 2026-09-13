@@ -82,6 +82,9 @@ from a PRD, `/ralph` is the escape hatch.
 - No em dashes in any generated content.
 - Prose over decoration. Minimal formatting.
 - Match existing conventions in this codebase.
+- Production code follows the ponytail ladder when the plugin is active:
+  reuse before write, stdlib before custom, one line before fifty. Tests are
+  governed by the Prime Directive, not by ponytail's test minimalism.
 
 ## Project-specific context
 

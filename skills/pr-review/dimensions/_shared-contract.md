@@ -10,7 +10,7 @@ Each finding is one block:
 
 ```
 ### [SEVERITY] Short title
-- dimension: <correctness | security | solution-hierarchy | tests | docs>
+- dimension: <correctness | security | solution-hierarchy | tests | docs | simplicity>
 - file: <path>
 - line: <line number or range, or "n/a">
 - problem: <one or two sentences, what is wrong>

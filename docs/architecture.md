@@ -13,7 +13,7 @@ Operationally that means: define success criteria, capture a baseline, map the
 blast radius, make a minimal change, re-run the baseline, and verify the actual
 goal. No change is "done" until it is proven to have caused no regression.
 
-## The four moving parts
+## The five moving parts
 
 ### 1. The Prime Directive itself
 
@@ -66,6 +66,29 @@ The meta-skills maintain the system itself:
 - `skillforge`: authors and validates new skills with SSL-style manifests.
 - `ralph`: an autonomous PRD-execution escape hatch (`/ralph`).
 - `pr-review`: multi-dimensional fan-out review with a shared output contract.
+
+### 5. Ponytail
+
+Ponytail (github.com/DietrichGebert/ponytail, MIT) is the minimalism layer:
+a ladder that stops code from being written when reuse, the standard library,
+or a platform feature already covers the need. It is consumed as a Claude
+Code plugin rather than vendored here, for a Solution Hierarchy reason. The
+plugin injects its ruleset through SessionStart and SubagentStart hooks, which
+is Tier 0. An independent benchmark found the same ruleset installed as a bare
+skill self-activated zero times in ten sessions, which is Tier 3 behaving
+exactly as this document predicts. Copying the skill file would have kept the
+words and lost the mechanism.
+
+The division of labor is explicit. Ponytail governs the shape of production
+code. The Prime Directive governs process and verification: success criteria,
+baseline, blast radius, regression gate, review. Where the two disagree, on
+test coverage, the Prime Directive wins; ponytail's one-check minimum is a
+floor, not a ceiling. `templates/settings.ponytail.json` scopes the subagent
+injection to the implementer and debugger so the explorer, tester, reviewer,
+and documenter keep their own contracts. The `implementer` carries a
+condensed ladder as a floor for sessions where the plugin is absent, and
+`pr-review` has a `simplicity` dimension that hunts over-engineering in the
+shared contract format.
 
 ## How a typical task flows
 

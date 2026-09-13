@@ -52,7 +52,9 @@ You emit:
 - **Root cause**: the actual underlying cause, with the evidence that proves it.
 - **Symptom chain**: how the root cause produces the observed symptom.
 - **Recommended fix**: what the implementer should change, and the blast radius
-  of that change.
+  of that change. Prefer the point all callers route through: one guard in
+  the shared function is both the smaller diff and the fix that does not
+  leave a sibling caller broken.
 - **Rejected band-aids**: the tempting shallow fixes and why they are wrong.
 
 ## Stuck rule
